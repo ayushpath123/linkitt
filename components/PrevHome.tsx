@@ -1,11 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import img1 from '@/assets/homepages/img1.png';
-import img2 from '@/assets/homepages/img2.png';
-import img3 from '@/assets/homepages/img3.png';
-import img4 from '@/assets/homepages/img4.png';
-import img5 from '@/assets/homepages/img5.png';
 import img from '@/assets/homepages/img.jpg'
 function PrevHome() {
     const images = [img];
