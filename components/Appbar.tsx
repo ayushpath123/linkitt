@@ -7,7 +7,6 @@ import React from 'react';
 function Appbar() {
   const router = useRouter();
   const { data: session, status } = useSession();
-
   const handleLogout = async () => {
     await signOut();
     router.push('/'); // Redirect after logout
@@ -25,9 +24,9 @@ function Appbar() {
       </div>
 
       {/* Welcome Message */}
-      <div className="hidden sm:flex items-center space-x-2">
+      <div className=" sm:flex items-center space-x-2">
         {status === "authenticated" && (
-          <div className="text-custom-yellow text-xl font-semibold lg:text-2xl">
+          <div className="hidden sm:block text-custom-yellow text-xl font-semibold lg:text-2xl">
             Welcome, <span className="font-bold">{session?.user?.name}</span>!
           </div>
         )}

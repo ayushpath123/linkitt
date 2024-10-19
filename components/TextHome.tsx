@@ -1,17 +1,37 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
+import { toast, Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 function TextHome() {
   const [name, setName] = useState('');
+  const router = useRouter(); // Correctly invoked useRouter
+  const handlebtn = async () => {
+    try {
+      const response = await axios.post('api/userprof/getid', { name });
+      const id = response.data.id;
+      if (id) {
+        toast.success("GOT the user");
+        router.push(`/profiles/view/${id}`); // Use id directly
+      } else {
+        toast.error("Id not Retrieved");
+      }
+    } catch (error) {
+      toast.error("Error retrieving ID");
+      console.error(error);
+    }
+  }
 
   return (
     <div className='mt-32 mx-4 md:mx-16'>
+      <Toaster reverseOrder={false} position='top-right' />
       <div className='flex flex-col gap-8'>
-        <p className='text-custom-yellow text-6xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold'> {/* Responsive text size */}
+        <p className='text-custom-yellow text-6xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold'>
           Everything you are. In one, simple link in bio.
         </p>
-        <p className='text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold'> {/* Responsive text size */}
+        <p className='text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold'>
           Join 50+ people using LinkIT for their link in bio. One link to help you share everything you create, curate, and sell from your Instagram, TikTok, Twitter, YouTube, and other social media profiles.
         </p>
         <div className='flex flex-col md:flex-row gap-4'>
@@ -26,11 +46,9 @@ function TextHome() {
             />
           </div>
           <div>
-            <Link href={`/profiles/view/${name}`} key={name}>
-              <button className='rounded-full items-center p-4 bg-custom-yellow min-h-16 transition duration-200 hover:bg-pink-300'>
-                Search User
-              </button>
-            </Link>
+            <button onClick={handlebtn} className='rounded-full items-center p-4 bg-custom-yellow min-h-16 transition duration-200 hover:bg-pink-300'>
+              Search User
+            </button>
           </div>
         </div>
       </div>

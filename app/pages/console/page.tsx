@@ -80,7 +80,7 @@ router.push(`/pages/console/${id}`)
 }
 
   return (
-    <div className="flex flex-col gap-4 min-h-screen justify-center items-center bg-black">
+    <div className="flex flex-col gap-4 px-6 min-h-screen justify-center items-center bg-black">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="text-5xl flex md:text-6xl lg:text-7xl">
         <span className="text-custom-yellow">Welcome,</span>

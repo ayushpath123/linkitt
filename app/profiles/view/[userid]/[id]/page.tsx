@@ -6,23 +6,20 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import Link from "next/link"; // Import Link for client-side navigation
-import Popup from "@/components/Popup";
 
 function Profile() {
-  const { data: session } = useSession();
-  //@ts-ignore
-  const userId = session?.user?.id;
-  const params = useParams();
+  const params=useParams();
+  const cid=params.id;
   const collectionId = params.id ? Number(params.id) : null;
+  const [cname, setCname] = useState<string>("");
   const [hide, setHide] = useState(true);
   const [collectionName, setCollectionName] = useState<string>('');
   const [links, setLinks] = useState<any[]>([]); 
   const [loading, setLoading] = useState<boolean>(true);
   const [timeoutReached, setTimeoutReached] = useState<boolean>(false); // Track spinner timeout
-  const [bool,setBool]=useState(false);
+
   useEffect(() => {
     const fetchLinks = async () => {
-      if (userId) {
         try {
           const rescol = await axios.post("/api/userprof/getlinks", {
             collectionId,
@@ -33,7 +30,6 @@ function Profile() {
           console.error("Error fetching links:", error);
           toast.error("Failed to fetch links");
         }
-      }
     };
 
     const getCollectionName = async () => {
@@ -57,27 +53,15 @@ function Profile() {
 
     getCollectionName(); 
     fetchLinks();   
-  }, [userId]);
-
-  const handleClick = async () => {
-    setBool(true)
-    setHide(false);
-  };
+  }, [cid]);
 
   return (
     <div className="flex flex-col gap-4 min-h-screen justify-center items-center bg-black px-4 lg:px-24 xl:px-48 relative">
       <Toaster position="top-right" reverseOrder={false} />
-
+      
       {/* Button positioned in the top-left corner */}
       <div className="absolute top-4 left-4 mt-8">
-        <Link href={'https://www.shorturl.at/'}>
-        <button className="bg-custom-yellow rounded-md h-10 p-2">
-          Shorten URL for Links
-        </button>
-        </Link>
-        
       </div>
-
       {/* Home Button positioned in the top-right corner */}
       <div className="absolute top-4 right-4 mt-8">
         <Link href="/">
@@ -115,25 +99,7 @@ function Profile() {
             <div className="text-white text-center">Oops! No data found.</div>
           )}
         </div>
-
-        <div className="flex flex-col sm:flex-row gap-2 mt-4">
-          <button
-            onClick={handleClick}
-            className="bg-custom-yellow rounded-md h-10 p-2 w-full sm:w-full sm:px-6"
-            disabled={!hide}
-          >
-            {hide ? "Add Links" : <LoadingSpinner />}
-          </button>
-          {/* <input
-            className="text-custom-yellow rounded-xl px-4 py-2  bg-black border-2 w-full sm:w-full border-custom-yellow focus:outline-none placeholder:text-gray-400"
-            placeholder="Link name"
-            type="text"
-            value={cname}
-            onChange={(e) => setCname(e.target.value)}
-          /> */}
-        </div>
       </div>
-      <Popup trigger={bool} setTrigger={setBool}></Popup>
     </div>
   );
 }

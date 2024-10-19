@@ -33,12 +33,11 @@ function Page() {
 
       // Check if the username is available
       const checkName = await axios.post('/api/checkname', { name });
-      if (checkName.data.exists) {
+      if (checkName.status==501) {
         toast.error("Username not available!");
         nameref.current?.focus(); // Focus on the username input
         return;
       }
-
       // Send OTP
       const response = await axios.post('/api/otp/send', { email, password });
       localStorage.setItem("otp", response.data.otp);

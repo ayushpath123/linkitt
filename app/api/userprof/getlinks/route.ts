@@ -8,6 +8,7 @@ export async function POST(req:NextRequest){
         },
         select:{
             reflink:true,
+            reftitle:true,
             id:true
         }
     })

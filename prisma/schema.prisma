@@ -25,7 +25,7 @@ model Collection{
 
 model Link{
  id Int @id @unique @default(autoincrement())
- reftitle String @default("") 
+ reftitle String @default("")
  reflink String
  collectionId Int
  collection Collection @relation(fields: [collectionId],references: [id])
