@@ -15,7 +15,7 @@ function SignInPage() {
   const handleSignin = async () => {
     setLoading(true);
     try {
-      const result = await signIn('credentials', {
+      const result = await signIn('credentials',{
         redirect: false,
         email,
         password,

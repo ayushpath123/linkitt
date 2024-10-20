@@ -67,25 +67,12 @@ function Profile() {
   return (
     <div className="flex flex-col gap-4 min-h-screen justify-center items-center bg-black px-4 lg:px-24 xl:px-48 relative">
       <Toaster position="top-right" reverseOrder={false} />
-
       {/* Button positioned in the top-left corner */}
-      <div className="absolute top-4 left-4 mt-8">
-        <Link href={'https://www.shorturl.at/'}>
-        <button className="bg-custom-yellow rounded-md h-10 p-2">
-          Shorten URL for Links
-        </button>
-        </Link>
-        
-      </div>
+
 
       {/* Home Button positioned in the top-right corner */}
-      <div className="absolute top-4 right-4 mt-8">
-        <Link href="/">
-          <button className="bg-custom-yellow rounded-md h-10 p-2">
-            Home
-          </button>
-        </Link>
-      </div>
+      
+
 
       <div className="text-4xl sm:text-5xl flex flex-col md:flex-row md:text-6xl lg:text-7xl items-center text-center md:text-left">
         <span className="text-custom-yellow">{collectionName}</span>
@@ -124,16 +111,16 @@ function Profile() {
           >
             {hide ? "Add Links" : <LoadingSpinner />}
           </button>
-          {/* <input
-            className="text-custom-yellow rounded-xl px-4 py-2  bg-black border-2 w-full sm:w-full border-custom-yellow focus:outline-none placeholder:text-gray-400"
-            placeholder="Link name"
-            type="text"
-            value={cname}
-            onChange={(e) => setCname(e.target.value)}
-          /> */}
         </div>
       </div>
       <Popup trigger={bool} setTrigger={setBool}></Popup>
+      <div className="flex justify-center items-center">
+  <Link href="/pages/console">
+    <button className="bg-custom-yellow rounded-md h-10 p-2">
+      Go to Collections
+    </button>
+  </Link>
+</div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Link from "next/link";
 
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -60,6 +61,13 @@ router.push(`/profiles/view/${userId}/${id}`)
           </div>
         </div>
       </div>
+      <div className="flex justify-center items-center">
+  <Link href="/">
+    <button className="bg-custom-yellow rounded-md h-10 p-2">
+      Home
+    </button>
+  </Link>
+</div>
     </div>
   );
 }

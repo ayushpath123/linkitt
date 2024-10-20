@@ -100,6 +100,13 @@ function Profile() {
           )}
         </div>
       </div>
+      <div className="flex justify-center items-center">
+  <Link href={`/profiles/view/${cid}`}>
+    <button className="bg-custom-yellow rounded-md h-10 p-2">
+      Go to collections
+    </button>
+  </Link>
+</div>
     </div>
   );
 }

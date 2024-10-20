@@ -7,12 +7,13 @@ import React from 'react';
 function Appbar() {
   const router = useRouter();
   const { data: session, status } = useSession();
+
   const handleLogout = async () => {
     await signOut();
     router.push('/'); // Redirect after logout
   };
 
-  if (status === "loading") return <div>Loading...</div>; // Display a loading message
+ // if (status === "loading") return <div>Loading...</div>; // Display a loading message
 
   return (
     <div className="flex flex-row justify-between items-center bg-white shadow-lg rounded-full sticky top-16 z-20 mx-4 md:mx-16 p-4 transition-all duration-300 ease-in-out">
@@ -24,9 +25,9 @@ function Appbar() {
       </div>
 
       {/* Welcome Message */}
-      <div className=" sm:flex items-center space-x-2">
+      <div className="hidden sm:flex items-center space-x-2">
         {status === "authenticated" && (
-          <div className="hidden sm:block text-custom-yellow text-xl font-semibold lg:text-2xl">
+          <div className="text-custom-yellow text-xl font-semibold lg:text-2xl">
             Welcome, <span className="font-bold">{session?.user?.name}</span>!
           </div>
         )}
